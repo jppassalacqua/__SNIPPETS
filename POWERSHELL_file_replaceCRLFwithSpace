@@ -1,0 +1,2 @@
+$path = "<filename>"
+(Get-Content $path -Raw).Replace("`r`n"," ") | Set-Content $path -Force -NoNewline
