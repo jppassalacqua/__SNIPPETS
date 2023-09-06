@@ -1,1 +1,1 @@
-# __SNIPPETS
+#ServiceNow Snippets and Examples
