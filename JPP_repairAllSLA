@@ -1,0 +1,5 @@
+var incidentQuery = ""; 
+var slaRepair = new SLARepair(); 
+slaRepair.setValidateOnly(false); 
+slaRepair.repairByFilter(incidentQuery, "incident"); 
+gs.log("SLARepair run  - found " + slaRepair.taskIds.length + " Incident records to repair", "SLARepair");
