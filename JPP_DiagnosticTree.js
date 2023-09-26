@@ -40,5 +40,26 @@ JPP_DiagnosticTree.prototype = {
         }
 
     },
+    getMermaidJsFromKB : function(current_sys_id){
+		var strResult = "graph LR\n";
+		strResult += this.getMermaidJsFromKB_RECURSE(current_sys_id);
+		return strResult;
+	},
+	getMermaidJsFromKB_RECURSE : function(current_sys_id){
+		var strResult = "";		
+		var gr = new GlideRecord("u_m2m_kb_knowledge_kb_knowledge");
+            gr.addQuery("u_kb_knowledge_child", current_sys_id);
+            gr.query();
+            while (gr.next()) {
+				//strResult += 'click "/kb_view.do?sysparm_article=' + gr.getDisplayValue('u_kb_knowledge_child') + '" _blank';
+				strResult += '\n';
+				strResult += (gr.getDisplayValue('u_kb_knowledge_child'));
+				strResult += ' --> ';
+				strResult += (gr.getDisplayValue('u_kb_knowledge_parent'));
+				strResult += '\n';
+				strResult += (this.getMermaidJsFromKB(gr.getValue('u_kb_knowledge_parent')));
+            }
+		return strResult;
+	},
     type: 'JPP_DiagnosticTree'
 };
